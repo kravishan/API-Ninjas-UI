@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./EmailForm.css";
+import "./Popup.css";
 
 function EmailForm() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleToChange = (event) => {
     setTo(event.target.value);
@@ -23,12 +25,20 @@ function EmailForm() {
     // TODO: Send email using to, subject, and body
   };
 
+  const handleManageTemplatesClick = () => {
+    setShowPopup(true);
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
   return (
     <div className="email-form">
       <div className="email-form-header">
         <h2>Email Notification Service</h2>
         <div className="email-form-buttons">
-          <button onClick={() => window.open("/templates", "_blank")}>Manage Templates</button>
+          <button onClick={handleManageTemplatesClick}>Manage Templates</button>
           <button onClick={() => window.open("/recipients", "_blank")}>Manage Recipients</button>
         </div>
       </div>
@@ -48,6 +58,19 @@ function EmailForm() {
         <div className="email-form-footer">
           <button className="send-email-btn" onClick={handleSendEmail}>Send Email</button>
         </div>
+      </div>
+      {showPopup && <Popup onClose={handlePopupClose} />}
+    </div>
+  );
+}
+
+function Popup({ onClose }) {
+  return (
+    <div className="popup-overlay">
+      <div className="popup">
+        <h3>Manage Templates</h3>
+        <p>Popup content</p>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
