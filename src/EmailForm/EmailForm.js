@@ -6,7 +6,8 @@ function EmailForm() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
+  const [showTemplatePopup, setShowTemplatePopup] = useState(false);
+  const [showRecipientPopup, setShowRecipientPopup] = useState(false);
 
   const handleToChange = (event) => {
     setTo(event.target.value);
@@ -26,11 +27,16 @@ function EmailForm() {
   };
 
   const handleManageTemplatesClick = () => {
-    setShowPopup(true);
+    setShowTemplatePopup(true);
+  };
+
+  const handleManageRecipientsClick = () => {
+    setShowRecipientPopup(true);
   };
 
   const handlePopupClose = () => {
-    setShowPopup(false);
+    setShowTemplatePopup(false);
+    setShowRecipientPopup(false);
   };
 
   return (
@@ -39,7 +45,7 @@ function EmailForm() {
         <h2>Email Notification Service</h2>
         <div className="email-form-buttons">
           <button onClick={handleManageTemplatesClick}>Manage Templates</button>
-          <button onClick={() => window.open("/recipients", "_blank")}>Manage Recipients</button>
+          <button onClick={handleManageRecipientsClick}>Manage Recipients</button>
         </div>
       </div>
       <div className="email-form-body">
@@ -59,17 +65,30 @@ function EmailForm() {
           <button className="send-email-btn" onClick={handleSendEmail}>Send Email</button>
         </div>
       </div>
-      {showPopup && <Popup onClose={handlePopupClose} />}
+      {showTemplatePopup && <TemplatePopup onClose={handlePopupClose} />}
+      {showRecipientPopup && <RecipientPopup onClose={handlePopupClose} />}
     </div>
   );
 }
 
-function Popup({ onClose }) {
+function TemplatePopup({ onClose }) {
   return (
     <div className="popup-overlay">
       <div className="popup">
         <h3>Manage Templates</h3>
-        <p>Popup content</p>
+        <p>text</p>
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+}
+
+function RecipientPopup({ onClose }) {
+  return (
+    <div className="popup-overlay">
+      <div className="popup">
+        <h3>Manage Recipients</h3>
+        <p>text</p>
         <button onClick={onClose}>Close</button>
       </div>
     </div>
