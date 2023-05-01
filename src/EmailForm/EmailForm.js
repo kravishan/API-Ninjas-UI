@@ -45,8 +45,8 @@ function EmailForm() {
           <label htmlFor="body-input">Body:</label>
           <textarea id="body-input" rows="10" cols="50" value={body} onChange={handleBodyChange} />
         </div>
-        <div className="email-form-buttons">
-          <button className="send-email-button" onClick={handleSendEmail}>Send Email</button>
+        <div className="email-form-footer">
+          <button className="send-email-btn" onClick={handleSendEmail}>Send Email</button>
         </div>
       </div>
     </div>
