@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./EmailForm.css";
 import "./Popup.css";
 import RecipientWindow from './RecipientsPopup.js';
+import TemplateWindow from './TemplatePopup.js';
 
 
 
@@ -78,9 +79,7 @@ function TemplatePopup({ onClose }) {
   return (
     <div className="popup-overlay">
       <div className="popup">
-        <h3>Manage Templates</h3>
-        <p>text</p>
-        <button onClick={onClose}>Close</button>
+        <TemplateWindow/>
       </div>
     </div>
   );
